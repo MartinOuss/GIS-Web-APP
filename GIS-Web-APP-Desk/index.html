@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebGis Irrigation System</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
+    integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
+    crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
+    integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
+    crossorigin=""></script>
+</head>
+<body>
+    <nav id="navbar">
+        <div class="container">
+           <div id ="logo">
+             Irrigation System Webapp
+             </div>
+             <div>
+                <ul class="navbar-menu">
+                    <li class="navbar-item">
+                        <a href="#map-section" class="navbar-links">
+                            Map 
+                       </a>
+                    </li>
+                    <li class="navbar-item">
+                       <a href="#table-section" class="navbar-links">
+                           Schedule
+                      </a>
+                   </li>
+                   <li class="navbar-item">
+                       <a href="/" class="navbar-item">
+                           Log in
+                      </a>
+                   </li>
+                </ul>
+
+             </div>
+        </div>
+    </nav>
+ <header class="header">
+     <div class="container">
+         <div>
+           <h1>
+               Manage your irrigation system with GIS Web application
+           </h1>
+           <p>
+               describe more what this system brings as a value and for who?
+           </p>
+         </div>
+     </div>
+ </header>
+  <section id="map-section">
+      <div class="container">
+          <div class="map-title">
+          <h2>
+              Explore map
+          </h2>
+          <div id="irriMap">
+              <!-- here to be leaflet map -->
+              <script src="./palmeraies.geojson"></script>
+             <script>
+                      const myMap = L.map('irriMap').setView([31.925399, -4.442387], 8);
+                      L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+                          attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+                          maxZoom: 18,
+                          id: 'mapbox/streets-v11',
+                          tileSize: 512,
+                          zoomOffset: -1,
+                          accessToken: 'your.mapbox.access.token'
+                        }).addTo(myMap);
+
+
+
+                // fetch geoJson data from palmeraies.js
+                L.geoJSON(palmeraie.geojson, { 
+                    onEachFeature: function(feature, layer) {
+                        layer.bindPopup(feature.properties.name);
+                    }
+                }).addTo(myMap);
+    
+                // geoJSon layer
+                const geoJsonLayer = L.geoJson(geojsonFeature, {
+                    style: function(feature) {
+                        return {
+                            color: feature.properties.color,
+                            fillColor: feature.properties.color,
+                            fillOpacity: 0.5,
+                            weight: 1.5
+                        };
+                    },
+                    onEachFeature: function(feature, layer) {
+                        layer.bindPopup(feature.properties.name);
+                    }
+                }).addTo(myMap);
+
+             </script> 
+         
+          </div>
+          
+        </div>
+
+      </div>
+  </section>
+  <section id="table-section">
+      <div class="container">
+          <div class="table-title">
+          <h2>
+              Explore table
+        
+          </h2>
+        </div>
+        <div class="table">
+            <!-- here to be the table -->
+            <table class="main-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Zone</th>
+                        <th>Appointment</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                      <td>1</td>
+                      <td>2</td>
+                      <td>3</td>
+                  </tr>
+                  <tr>
+                      <td>4</td>
+                      <td>5</td>
+                      <td>6</td>
+                  </tr>
+                  <tr>
+                    <td>7</td>
+                    <td>8</td>
+                    <td>9</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>11</td>
+                    <td>12</td>
+                </tr>
+                </tbody>
+
+            </table>
+           
+        </div>
+
+    </div>
+
+  </section>
+  <!-- javascript link -->
+<!-- <script src="./app.js"></script> -->
+
+
+
+<!-- Idk why fixed navbar function doesnt work -->
+<script src="./app.js"></script>
+
+</body> 
+</html>
+
